@@ -15,12 +15,12 @@ public class TemperaturaFactory{
    double maior;
    
    
-   String stmt= "SELECT * FROM TEMPERATURA;";
+   String stmt= "SELECT * FROM TEMPERATURA LIMIT ?";
    
    
    
    public String[][] completaTabela(int n, double media, double maior, double menor){
-      String quantidade= ""+n;
+      //String quantidade= ""+n;
       menor=9999999;
       maior=0;
       media=0;
@@ -30,6 +30,7 @@ public class TemperaturaFactory{
          ct =new ConexaoBD();
          conn=ct.conectar();
          ps=conn.prepareStatement(stmt);
+         ps.setInt(1, n);
          resp= ps.executeQuery();
          int i=0;
          while(resp.next()){
